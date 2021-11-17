@@ -20,7 +20,9 @@ echo "Updating config.fish to latest version..."
 cp $CONFIG_FISH_SOURCE $CONFIG_FISH_TARGET
 
 # Install Fish functions
-set FISH_FUNCTIONS_SOURCE "$REPO_PATH/fish_functions"
-set FISH_FUNCTIONS_TARGET "$HOME/.config/fish/functions/"
 echo "Installing fish functions..."
-cp "$FISH_FUNCTIONS_SOURCE/"* $FISH_FUNCTIONS_TARGET
+cp "$REPO_PATH/fish_functions/"* "$HOME/.config/fish/functions/"
+
+# Install RC files
+echo "Installing .vimrc..."
+cp "$REPO_PATH/vimrc" ~/.vimrc
