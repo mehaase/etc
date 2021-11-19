@@ -21,6 +21,7 @@ cp $CONFIG_FISH_SOURCE $CONFIG_FISH_TARGET
 
 # Install Fish functions
 echo "Installing fish functions..."
+mkdir -p "$HOME/.config/fish/functions/"
 cp "$REPO_PATH/fish_functions/"* "$HOME/.config/fish/functions/"
 
 # Install RC files
