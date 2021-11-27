@@ -5,21 +5,23 @@ set SCRIPT_PATH (status --current-filename)
 set REPO_PATH (dirname (realpath "$PWD/$SCRIPT_PATH"))
 
 # Make sure oh-my-fish is installed.
-set omf (which omf)
-if test -z $omf
+if not functions -q omf
     echo "Installing oh-my-fish..."
     curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
     set new_omf true
 else
-    echo "Existing oh-my-fish found at $omf"
+    echo "oh-my-fish is already installed."
 end
 
 # Set default theme.
 set omf_theme "bobthefish"
+set omf_theme_installed (omf list | grep $omf_theme)
+if test -z $omf_theme_installed
+    echo "Installing oh-my-fish theme: $omf_theme..."
+    omf install $omf_theme
+end
 echo "Setting oh-my-fish theme to $omf_theme..."
-omf install $omf_theme
 omf theme $omf_theme
-set theme_color_scheme solarized-dark
 
 # Create config.fish
 set CONFIG_FISH_SOURCE "$REPO_PATH/config.fish"
@@ -46,11 +48,12 @@ echo "Installing .vimrc..."
 cp "$REPO_PATH/vimrc" ~/.vimrc
 
 # Remind to install powerline font.
-set font_url "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Inconsolata/complete/Inconsolata%20Nerd%20Font%20Complete%20Mono.otf"
-set font_file "Inconsolata_Nerd_Font_Complete_Mono.otf"
-if test -n $new_omf
-    curl $font_url -o $font_file
+echo $new_omf
+if test -n "$new_omf"
+    echo "==================================================="
     echo "Since you've just installed OMF for the first time,"
-    echo "don't forget to install Powerline fonts. I just downloaded"
-    echo "it to '$font_file'."
+    echo "don't forget to install Powerline fonts."
+    echo ""
+    echo "https://github.com/microsoft/cascadia-code/releases"
+    echo "==================================================="
 end

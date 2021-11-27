@@ -7,5 +7,8 @@ abbr --add --global pushup "git push -u origin (git branch --show-current)"
 # Set `less` options.
 set -gx LESS NR
 
+# Set fish theme.
+set theme_color_scheme solarized-dark
+
 # Source the local fish config:
 source "$HOME/.config/fish/config.local.fish"
