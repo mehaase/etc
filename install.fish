@@ -4,11 +4,19 @@
 set SCRIPT_PATH (status --current-filename)
 set REPO_PATH (dirname (realpath "$PWD/$SCRIPT_PATH"))
 
+# Check dependencies.
+set DEPENDENCIES git
+for dep in $DEPENDENCIES
+    if ! which $dep >/dev/null
+        echo "ERROR: git must be installed"; and exit 1
+    end
+end
+
 # Make sure oh-my-fish is installed.
 if not functions -q omf
     echo "Installing oh-my-fish..."
-    curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
-    set new_omf true
+    curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish 2>&1 >/dev/null
+    set REMINDERS $REMINDERS "You've just installed OMF for the first time; don't forget to install Powerline fonts from https://github.com/microsoft/cascadia-code/releases."
 else
     echo "oh-my-fish is already installed."
 end
@@ -47,13 +55,24 @@ cp "$REPO_PATH/fish_functions/"* "$HOME/.config/fish/functions/"
 echo "Installing .vimrc..."
 cp "$REPO_PATH/vimrc" ~/.vimrc
 
-# Remind to install powerline font.
-echo $new_omf
-if test -n "$new_omf"
-    echo "==================================================="
-    echo "Since you've just installed OMF for the first time,"
-    echo "don't forget to install Powerline fonts."
+# Configure Git
+echo "Configuring Git..."
+git config --global core.editor vim
+git config --global init.defaultBranch main
+git config --global merge.conflictstyle diff3
+git config --global pull.ff only
+git config --global user.name "Mark E. Haase"
+
+# Some machines (e.g. work) might have different email.
+git config --global user.email >/dev/null; or set REMINDERS $REMINDERS "Set your git email: git config --global user.email mehaase@gmail.com"
+
+echo "Done."
+
+if set -q REMINDERS
     echo ""
-    echo "https://github.com/microsoft/cascadia-code/releases"
-    echo "==================================================="
+    echo "************ REMINDERS ************"
+    for reminder in $REMINDERS
+        echo "---> $reminder"
+    end
+    echo "***********************************"
 end
