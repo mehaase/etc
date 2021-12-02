@@ -66,7 +66,7 @@ git config --global user.name "Mark E. Haase"
 # Some machines (e.g. work) might have different email.
 git config --global user.email >/dev/null; or set REMINDERS $REMINDERS "Set your git email: git config --global user.email mehaase@gmail.com"
 
-echo "Done."
+echo "🌟🚀 Done 🚀🌟"
 
 if set -q REMINDERS
     echo ""
