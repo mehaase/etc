@@ -10,6 +10,7 @@ Set up my machines with helpful configurations and shortcuts.
 2. Open a new fish shell (which should now be your default shell)
 3. Run `fish install.fish`
 
-## References
+## Notes
 
 * Nice Fish reference: https://github.com/jorgebucaran/cookbook.fish
+* fswatch example: `fswatch -o test.dot | xargs -n1 -I{} dot -Tpng -O test.dot`
