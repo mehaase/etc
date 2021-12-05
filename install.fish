@@ -92,10 +92,6 @@ git config --global user.email >/dev/null; or set REMINDERS $REMINDERS "Set your
 
 info "🌟🚀 Done 🚀🌟"
 
-set REMINDERS $REMINDERS "remind1"
-set REMINDERS $REMINDERS "remind2"
-set REMINDERS $REMINDERS "remind3"
-
 if set -q REMINDERS
     warn ""
     warn "************ REMINDERS ************"
