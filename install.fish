@@ -30,7 +30,17 @@ switch $platform
     case Darwin
         info "Installing MacOS dependencies..."
         set deps (cat "$REPO_PATH/macos.deps")
-        # echo $deps | xargs brew install
+        echo $deps | xargs brew install
+    case Linux
+        set distro (lsb_release -si)
+        switch $distro
+            case Ubuntu
+                info "Installing Ubuntu dependencies (may need sudo password)..."
+                set deps (cat "$REPO_PATH/ubuntu.deps")
+                echo $deps | xargs sudo apt install
+            case '*'
+                error "Don't know how to install dependencies for: $platform-$distro"
+        end
     case '*'
         error "Don't know how to install dependencies for: $platform"
 end

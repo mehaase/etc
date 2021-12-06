@@ -16,7 +16,7 @@ else
     brew install fish || exit 1
 
     echo "Setting fish as login shell..."
-    chsh -s fish
+    chsh -s /usr/local/bin/fish
 fi
 
 if test -d /Applications/iTerm.app/; then
