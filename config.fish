@@ -12,5 +12,8 @@ set -gx LESS NR
 # Set fish theme.
 set theme_color_scheme solarized-dark
 
+# Set fish vim mode.
+fish_vi_key_bindings
+
 # Source the local fish config:
 source "$HOME/.config/fish/config.local.fish"

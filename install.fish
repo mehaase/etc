@@ -24,7 +24,7 @@ function warn -a message
     set_color normal
 end
 
-if [ "$argv[1]" = "--initial"]
+if [ "$argv[1]" = "--initial" ]
     # Install dependencies.
     set platform (uname)
     switch $platform
