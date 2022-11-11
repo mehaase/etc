@@ -2,8 +2,7 @@ function paste
     # Multi-platform wrapper to get clipboard contents.
     switch (uname)
         case Linux
-            # NOT TESTED YET:
-            xclip -o -sel clip
+            xclip -o -selection clipboard
         case Darwin
             pbpaste
         case '*'
